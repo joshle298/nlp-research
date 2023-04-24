@@ -2,11 +2,11 @@
   "name": "uber-eats-scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "urlScraper.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js --ignore ./scraped_data.json\""
+    "start": "node dist/urlScraper.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/urlScraper.js --ignore ./scraped_data.json\""
   },
   "keywords": [],
   "author": "",
