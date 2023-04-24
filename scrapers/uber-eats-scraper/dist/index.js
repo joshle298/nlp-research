@@ -18,6 +18,7 @@ async function scrapeRestaurant(url) {
     const page = await context.newPage();
     await page.goto(url);
     console.log("Page loaded");
+    // await page.pause();
     try {
         await page.getByTestId('close-button').click();
     }
