@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
+const promises_2 = require("fs/promises");
 const restaurantURLs = [
     "https://www.ubereats.com/store/silverlake-ramen-south-pasadena-ca/cEcNQ8ePUi-3c6F98vnCYg?diningMode=DELIVERY",
     "https://www.ubereats.com/store/juice-generation-prince-st/Wne4MfksREykJZbwkeh8Fg?diningMode=DELIVERY&ps=1",
@@ -18,7 +19,7 @@ async function scrapeRestaurant(url) {
     const page = await context.newPage();
     await page.goto(url);
     console.log("Page loaded");
-    // await page.pause();
+    await page.pause();
     try {
         await page.getByTestId('close-button').click();
     }
@@ -92,8 +93,16 @@ async function scrapeRestaurant(url) {
     await browser.close();
 }
 async function main() {
-    for (const restaurant of restaurantURLs) {
-        await scrapeRestaurant(restaurant);
+    try {
+        const data = await (0, promises_2.readFile)('scraped_urls.txt', 'utf-8');
+        const restaurants = data.split('\n');
+        for (const restaurant of restaurants) {
+            await scrapeRestaurant(restaurant);
+        }
+        console.log('Scraping completed');
+    }
+    catch (err) {
+        console.error('Error during scraping:', err);
     }
 }
 main();

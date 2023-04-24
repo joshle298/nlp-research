@@ -1,5 +1,6 @@
 import { chromium } from "playwright";
 import fs from 'fs/promises';
+import { readFile } from 'fs/promises';
 
 const restaurantURLs = [
     "https://www.ubereats.com/store/silverlake-ramen-south-pasadena-ca/cEcNQ8ePUi-3c6F98vnCYg?diningMode=DELIVERY",
@@ -108,8 +109,21 @@ async function scrapeRestaurant(url: string) {
 }
 
 async function main() {
-  for (const restaurant of restaurantURLs) {
-    await scrapeRestaurant(restaurant);
+  // for (const restaurant of restaurantURLs) {
+  //   await scrapeRestaurant(restaurant);
+  // }
+  
+  try {
+    const data = await readFile('scraped_urls.txt', 'utf-8');
+    const restaurants = data.split('\n');
+
+    for (const restaurant of restaurants) {
+      await scrapeRestaurant(restaurant);
+    }
+
+    console.log('Scraping completed');
+  } catch (err) {
+    console.error('Error during scraping:', err);
   }
 }
 
