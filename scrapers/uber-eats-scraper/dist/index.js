@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
 const restaurantURLs = [
+    "https://www.ubereats.com/store/silverlake-ramen-south-pasadena-ca/cEcNQ8ePUi-3c6F98vnCYg?diningMode=DELIVERY",
     "https://www.ubereats.com/store/juice-generation-prince-st/Wne4MfksREykJZbwkeh8Fg?diningMode=DELIVERY&ps=1",
     "https://www.ubereats.com/store/dallas-bbq-chelsea/EMA8iPP5TT-2yDC3sjWxMw?diningMode=DELIVERY",
     "https://www.ubereats.com/store/dig-union-square/5-KLz2H6QwqiU3h-9Unk1A?diningMode=DELIVERY",
+    "https://www.ubereats.com/store/shake-shack-west-village/yRfk0I6-Sdey3bUvG-IRTQ?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjI4MSUyMEdyYW5kJTIwU3QlMjIlMkMlMjJyZWZlcmVuY2UlMjIlM0ElMjI4NGUzY2IzMC02OTQ0LTI1NWYtNTI4Ny04OWQzNzE2NTVhYTQlMjIlMkMlMjJyZWZlcmVuY2VUeXBlJTIyJTNBJTIydWJlcl9wbGFjZXMlMjIlMkMlMjJsYXRpdHVkZSUyMiUzQTQwLjcxNzYzMTYlMkMlMjJsb25naXR1ZGUlMjIlM0EtNzMuOTkyNjkzMiU3RA%3D%3D&ps=1"
 ];
 async function scrapeRestaurant(url) {
     const browser = await playwright_1.chromium.launch({ headless: false });
@@ -34,10 +36,16 @@ async function scrapeRestaurant(url) {
     const store_address = await page.getByRole('button', { name: 'Copy' }).innerText();
     await page.getByTestId('close-button').click();
     console.log(store_address);
-    const text = await page.getByText(/\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+(?:\s?[A-Za-z]+)*\s\W\s\$/).innerText();
-    const regex = /(\d\.\d)\s\((\d+[\+]*\s?ratings?)\)\s\W\s([A-Za-z]+(?:\s?[A-Za-z]+)*)\s\W\s\$/;
-    const match = text.match(regex);
-    const rating = "";
+    const regex = /\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+(?:\s?[A-Za-z]+)*\s/;
+    var match = null;
+    try {
+        const text = await page.getByText(/\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+(?:\s?[A-Za-z]+)*\s/).innerText();
+        match = text.match(regex);
+    }
+    catch (error) {
+        console.log('No match found.');
+    }
+    var rating = "";
     if (match) {
         const rating = match[1];
         const numOfRatings = match[2];
@@ -47,8 +55,11 @@ async function scrapeRestaurant(url) {
     else {
         console.log('No match found.');
     }
-    const menu_items = await page.getByRole('list').allTextContents();
+    const menu_items = await page.getByRole('listitem').allTextContents();
     console.log(menu_items);
+    if (rating) {
+        rating = "";
+    }
     const scrapedData = {
         store_name,
         store_address,
