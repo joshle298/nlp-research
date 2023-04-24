@@ -18,6 +18,8 @@ async function scrapeRestaurant(url: string) {
   await page.goto(url);
   console.log("Page loaded");
 
+  await page.pause();
+  
   try {
     await page.getByTestId('close-button').click();
   } catch (error) {
