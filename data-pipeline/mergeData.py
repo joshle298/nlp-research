@@ -1,5 +1,6 @@
 import json
 import pprint
+import re
 import os
 
 
@@ -44,6 +45,13 @@ for file_path in file_paths:
         # Load the JSON data
         data = json.load(f)
         for store_data in data:
+            # Get rid of prices in menu items
+            store_data["menu_items"] = list(
+                map(
+                    lambda x: re.sub(r"(\$\d+(?:,\d+)?(?:.\d+)?)", ". ", x),
+                    store_data["menu_items"],
+                )
+            )
             # Create a Store object from the store data
             store = Store(
                 store_data["store_name"],
@@ -51,6 +59,8 @@ for file_path in file_paths:
                 store_data["rating"],
                 store_data["menu_items"],
             )
+
+            print(store_data["menu_items"])
 
             # Add the Store object to the set of unique stores
             restaurants.add(store)
