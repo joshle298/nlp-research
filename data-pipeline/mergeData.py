@@ -31,9 +31,9 @@ class Store:
 
 # Define the file paths
 file_paths = [
-    "C:/Users/Alan/nlp-research/scrapers/uber-eats-scraper/scraped_data_mimi.json",
-    "C:/Users/Alan/nlp-research/scrapers/uber-eats-scraper/scraped_data_josh.json",
-    "C:/Users/Alan/nlp-research/scrapers/uber-eats-scraper/scraped_data_akhil.json",
+    "scrapers/uber-eats-scraper/scraped_data_mimi.json",
+    "scrapers/uber-eats-scraper/scraped_data_josh.json",
+    "scrapers/uber-eats-scraper/scraped_data_akhil.json",
 ]
 
 store_count = 0
