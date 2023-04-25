@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js --ignore ./scraped_data.json\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js --ignore ./scraped_data.json\"",
+    "url": "concurrently \"npx tsc --watch\" \"nodemon -q dist/urlScraper.js --ignore ./scraped_data.json\""
   },
   "keywords": [],
   "author": "",
