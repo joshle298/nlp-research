@@ -1,0 +1,65 @@
+[
+    {
+        "store_name": "Subway (170 W 23RD ST)",
+        "store_address": "221 7th Ave, New York, NY 10011",
+        "rating": "",
+        "menu_items": [
+            "United States",
+            "New York",
+            "New York",
+            "Manhattan",
+            "Chelsea",
+            "Subway (170 W 23RD ST)",
+            "Picked for youOven-Roasted Turkey$7.99If a classic is what you crave, our thin-sliced Oven-Roasted Turkey is the sandwich for you. It’s full of flavor and made to order with your choice of crisp veggies, served on our freshly baked, Hearty Multigrain bread.Sweet Onion Chicken Teriyaki$8.99The Sweet Onion Chicken Teriyaki sub is one sah-weeet sub. It starts with Hearty Multigrain bread, add perfectly cooked grilled chicken strips, marinated in our Sweet Onion Teriyaki Sauce, then pile on the crunch with lettuce, spinach, tomatoes, cucumbers, green peppers, red onions and top with another pass of our Sweet Onion Teriyaki sauce.Italian B.M.T.®$7.99The Italian B.M.T.® sandwich is filled with Genoa salami, spicy pepperoni, and Black Forest ham. Big. Meaty. Tasty. Get it.Tuna$7.99You’ll love every bite of our classic tuna sandwich. 100% wild caught tuna blended with creamy mayo then topped with your choice of crisp, fresh veggies. 100% delicious.Chicken & Bacon Ranch$8.99What do you get when you mix juicy Rotisserie-Style Chicken, melty Monterey Cheddar Cheese, Hickory-Smoked Bacon, and our creamy Peppercorn Ranch? Your sandwich happy place.",
+            "Oven-Roasted Turkey$7.99If a classic is what you crave, our thin-sliced Oven-Roasted Turkey is the sandwich for you. It’s full of flavor and made to order with your choice of crisp veggies, served on our freshly baked, Hearty Multigrain bread.",
+            "Sweet Onion Chicken Teriyaki$8.99The Sweet Onion Chicken Teriyaki sub is one sah-weeet sub. It starts with Hearty Multigrain bread, add perfectly cooked grilled chicken strips, marinated in our Sweet Onion Teriyaki Sauce, then pile on the crunch with lettuce, spinach, tomatoes, cucumbers, green peppers, red onions and top with another pass of our Sweet Onion Teriyaki sauce.",
+            "LAY’S® Classic$1.54It all starts with farm-grown potatoes, cooked and seasoned to perfection. So every LAY'S® potato chip is perfectly crispy and full of fresh potato taste. Happiness in Every Bite.®",
+            "Double Chocolate$1.09Calling all chocolate lovers! Our Double Chocolate Cookie has your name written all over it. It has rich semi-sweet chocolate chips mixed in a chocolate dough, along with white chips, vanilla and other natural flavors. Take one bite and your taste buds will thank you for it.",
+            "Shareable Desserts6 Pack Cookie Box$4.69Our 6 Pack Cookie Box is the most delicious out-of-the-box thinking. Pick your favorite flavor and enjoy a half-dozen of fresh-baked cookies. One for you, one for him, one for her and even more to keep sharing…or not! Get the New 6 Pack Cookie Box today and get that sweet treat you’re craving.12 Pack Cookie Box$8.5612 cookies. 1 delicious order. That’s what our 12 Cookie Box is all about. Pick your favorite flavor and enjoy a dozen of fresh-baked cookies. That's a one-way ticket to sweet treats that you can share with friends, family or co-workers. With so many choices, there’s a cookie for everyone.",
+            "6 Pack Cookie Box$4.69Our 6 Pack Cookie Box is the most delicious out-of-the-box thinking. Pick your favorite flavor and enjoy a half-dozen of fresh-baked cookies. One for you, one for him, one for her and even more to keep sharing…or not! Get the New 6 Pack Cookie Box today and get that sweet treat you’re craving.",
+            "12 Pack Cookie Box$8.5612 cookies. 1 delicious order. That’s what our 12 Cookie Box is all about. Pick your favorite flavor and enjoy a dozen of fresh-baked cookies. That's a one-way ticket to sweet treats that you can share with friends, family or co-workers. With so many choices, there’s a cookie for everyone."
+        ]
+    },
+    {
+        "store_name": "McDonalds (170 W 23RD ST)",
+        "store_address": "23 5th Ave, New York, NY 10011",
+        "rating": "",
+        "menu_items": [
+            "United States",
+            "New York",
+            "New York",
+            "Manhattan",
+            "Chelsea",
+            "6 Pack Cookie Box$4.69Our 6 Pack Cookie Box is the most delicious out-of-the-box thinking. Pick your favorite flavor and enjoy a half-dozen of fresh-baked cookies. One for you, one for him, one for her and even more to keep sharing…or not! Get the New 6 Pack Cookie Box today and get that sweet treat you’re craving.",
+            "12 Pack Cookie Box$8.5612 cookies. 1 delicious order. That’s what our 12 Cookie Box is all about. Pick your favorite flavor and enjoy a dozen of fresh-baked cookies. That's a one-way ticket to sweet "
+        ]
+    },
+    {
+        "store_name": "McDonalds (171 W 32RD ST)",
+        "store_address": "23 5th Ave, New York, NY 10011",
+        "rating": "",
+        "menu_items": [
+            "United States",
+            "New York",
+            "New York",
+            "Manhattan",
+            "Chelsea",
+            "6 Pack Cookie Box$4.69.",
+            "12 Pack Cookie Box$8.5612 cookies. Fresh and delicious. "
+        ]
+    },
+    {
+        "store_name": "McDonalds (171 W 32RD ST)",
+        "store_address": "23 5th Ave, New York, NY 10011",
+        "rating": "",
+        "menu_items": [
+            "United States",
+            "New York",
+            "New York",
+            "Manhattan",
+            "Chelsea",
+            "6 Pack Cookie Box$4.69.",
+            "12 Pack Cookie Box$8.5612 cookies. Fresh and delicious. "
+        ]
+    }
+]

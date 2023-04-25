@@ -75,5 +75,7 @@ print(
 filename = "merged-data.json"
 file_path = os.path.join(os.path.dirname(__file__), filename)  # build the file path
 
-with open(file_path, "w") as f:
-    json.dump([store.__dict__ for store in restaurants], f, indent=4)
+with open(file_path, "w", encoding="utf-8") as f:
+    json.dump(
+        [store.__dict__ for store in restaurants], f, indent=4, ensure_ascii=False
+    )
