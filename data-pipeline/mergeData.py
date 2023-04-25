@@ -1,5 +1,6 @@
 import json
 import pprint
+import os
 
 
 class Store:
@@ -35,6 +36,7 @@ file_paths = [
     "C:/Users/Alan/nlp-research/scrapers/uber-eats-scraper/scraped_data_akhil.json",
 ]
 
+store_count = 0
 restaurants = set()
 # Loop through the file paths
 for file_path in file_paths:
@@ -52,6 +54,16 @@ for file_path in file_paths:
 
             # Add the Store object to the set of unique stores
             restaurants.add(store)
+            store_count += 1
 
-pprint.pprint(restaurants)
-print("items in set: ", len(restaurants))
+# pprint.pprint(restaurants)
+print(
+    f"restaurants scraped (exlcuding duplicates): {store_count}\nunique restaurants: {len(restaurants)}"
+)
+
+
+filename = "merged-data.json"
+file_path = os.path.join(os.path.dirname(__file__), filename)  # build the file path
+
+with open(file_path, "w") as f:
+    json.dump([store.__dict__ for store in restaurants], f, indent=4)
