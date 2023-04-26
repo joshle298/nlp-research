@@ -12,10 +12,17 @@ Then run:
 npm run url
 ```
 
-Edit the index.ts file line 
+Edit the index.ts file line:
 
 ```
 const fileName = "scraped_data_<NAME>.json";
+```
+
+As well as the package.json file lines
+
+```
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js --ignore ./scraped_data_<NAME>.json\"",
+    "url": "concurrently \"npx tsc --watch\" \"nodemon -q dist/urlScraper.js --ignore ./scraped_data_<NAME>.json\""
 ```
 
 Then once the URLs are loaded into `scraped_urls.txt`, run:

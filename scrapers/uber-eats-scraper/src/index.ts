@@ -128,15 +128,12 @@ async function scrapeRestaurant(url: string) {
 }
 
 async function main() {
-  // for (const restaurant of restaurantURLs) {
-  //   await scrapeRestaurant(restaurant);
-  // }
 
   try {
     const data = await readFile("scraped_urls.txt", "utf-8");
-    const restaurants = data.split("\n");
+    const restaurantURLs = data.split("\n");
 
-    for (const restaurant of restaurants) {
+    for (const restaurant of restaurantURLs) {
       await scrapeRestaurant(restaurant);
     }
 

@@ -7,6 +7,7 @@ const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
 const promises_2 = require("fs/promises");
 async function scrapeRestaurant(url) {
+    console.log(url);
     const browser = await playwright_1.chromium.launch({ headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -82,7 +83,7 @@ async function scrapeRestaurant(url) {
     ];
     scrapedData.menu_items = scrapedData.menu_items.map((item) => item.replace(/Quick view/g, ''));
     scrapedData.menu_items = scrapedData.menu_items.filter((item) => !forbidden.includes(item));
-    const fileName = "scraped_data.json";
+    const fileName = "scraped_data_josh.json";
     try {
         const fileContent = await promises_1.default.readFile(fileName, "utf-8");
         try {
@@ -109,8 +110,8 @@ async function scrapeRestaurant(url) {
 async function main() {
     try {
         const data = await (0, promises_2.readFile)("scraped_urls.txt", "utf-8");
-        const restaurants = data.split("\n");
-        for (const restaurant of restaurants) {
+        const restaurantURLs = data.split("\n");
+        for (const restaurant of restaurantURLs) {
             await scrapeRestaurant(restaurant);
         }
         console.log("Scraping completed");

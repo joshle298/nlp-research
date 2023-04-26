@@ -11,7 +11,7 @@ async function scrapeUrls(url: string) {
     console.log("Page loaded");
 
     try {
-        await page.getByTestId('close-button').click({ timeout: 5_000 });
+        await page.getByTestId('close-button').click({ timeout: 10_000 });
     } catch (error) {
         console.log("Close button not found or not needed");
     }
@@ -61,7 +61,7 @@ async function scrapeUrls(url: string) {
 }
 
 async function main() {
-    await scrapeUrls('https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk55dSUyMExhbmdvbmUlMjBIZWFsdGglMjIlMkMlMjJyZWZlcmVuY2UlMjIlM0ElMjJjNDM3NmNlZS02ZTFiLTNjODYtYWJjNS0yMDdmZWI2YTNkMTQlMjIlMkMlMjJyZWZlcmVuY2VUeXBlJTIyJTNBJTIydWJlcl9wbGFjZXMlMjIlMkMlMjJsYXRpdHVkZSUyMiUzQTQwLjc0MTc2MzYlMkMlMjJsb25naXR1ZGUlMjIlM0EtNzMuOTc0NTM1NyU3RA%3D%3D&ps=1');
+    await scrapeUrls('https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjI4MSUyMEdyYW5kJTIwU3QlMjIlMkMlMjJyZWZlcmVuY2UlMjIlM0ElMjI4NGUzY2IzMC02OTQ0LTI1NWYtNTI4Ny04OWQzNzE2NTVhYTQlMjIlMkMlMjJyZWZlcmVuY2VUeXBlJTIyJTNBJTIydWJlcl9wbGFjZXMlMjIlMkMlMjJsYXRpdHVkZSUyMiUzQTQwLjcxNzYzMTYlMkMlMjJsb25naXR1ZGUlMjIlM0EtNzMuOTkyNjkzMiU3RA%3D%3D&ps=1');
     // Example URL you can paste above:
     // https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk5ZVSUyMFN0ZXJuJTIwU2Nob29sJTIwb2YlMjBCdXNpbmVzcyUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUo1Uk40UVpCWndva1JWa1RyY0FMUUtqcyUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0E0MC43MjkxMDAyJTJDJTIybG9uZ2l0dWRlJTIyJTNBLTczLjk5NjI1MTMlN0Q%3D&ps=1
 }
