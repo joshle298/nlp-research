@@ -5,14 +5,13 @@ import os
 
 
 class Store:
-    def __init__(self, store_name, store_address, rating, menu_items):
+    def __init__(self, store_name, store_address, menu_items):
         self.store_name = store_name
         self.store_address = store_address
-        self.rating = rating
         self.menu_items = menu_items
 
     def __str__(self):
-        return f"Store name: {self.store_name}\nStore address: {self.store_address}\nRating: {self.rating}\nMenu items: {self.menu_items}"
+        return f"Store name: {self.store_name}\nStore address: {self.store_address}\nMenu items: {self.menu_items}"
 
     def __repr__(self):
         return self.__str__()
@@ -56,7 +55,7 @@ for file_path in file_paths:
             store = Store(
                 store_data["store_name"],
                 store_data["store_address"],
-                store_data["rating"],
+                # store_data["rating"],
                 store_data["menu_items"],
             )
 

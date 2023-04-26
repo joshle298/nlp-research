@@ -37,47 +37,47 @@ async function scrapeRestaurant(url: string) {
   await page.getByTestId("close-button").click();
   console.log(store_address);
 
-  const regex =
-    /\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+?(?:\s?[A-Za-z]+)*\s/;
-  var match = null;
+  // const regex =
+  //   /\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+?(?:\s?[A-Za-z]+)*\s/;
+  // var match = null;
 
-  try {
-    const text = await page
-      .getByText(
-        /\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+?(?:\s?[A-Za-z]+)*\s/
-      )
-      .innerText();
-    match = text.match(regex);
-  } catch (error) {
-    console.log("No match found.");
-  }
+  // try {
+  //   const text = await page
+  //     .getByText(
+  //       /\d\.\d\s\(\d+[\+]*\s?ratings?\)\s\W\s[A-Za-z]+?(?:\s?[A-Za-z]+)*\s/
+  //     )
+  //     .innerText();
+  //   match = text.match(regex);
+  // } catch (error) {
+  //   console.log("No match found.");
+  // }
 
-  var rating = "";
+  // var rating = "";
 
-  if (match) {
-    const rating = match[1];
-    const numOfRatings = match[2];
-    const cuisineType = match[3];
+  // if (match) {
+  //   const rating = match[1];
+  //   const numOfRatings = match[2];
+  //   const cuisineType = match[3];
 
-    console.log(`Rating: ${rating}`);
-    // console.log(`Number of Ratings: ${numOfRatings}`);
-    // console.log(`Cuisine Type: ${cuisineType}`);
-  } else {
-    console.log("No match found.");
-  }
+  //   console.log(`Rating: ${rating}`);
+  //   // console.log(`Number of Ratings: ${numOfRatings}`);
+  //   // console.log(`Cuisine Type: ${cuisineType}`);
+  // } else {
+  //   console.log("No match found.");
+  // }
 
   const menu_items = await page.getByRole("listitem").allTextContents();
   // console.log(menu_items);
 
-  if (rating) {
-    rating = "";
-  }
+  // if (rating) {
+  //   rating = "";
+  // }
 
   // Save scraped data to a JSON file
   var scrapedData = {
     store_name,
     store_address,
-    rating,
+    // rating,
     menu_items,
   };
 
