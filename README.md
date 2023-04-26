@@ -12,6 +12,12 @@ Then run:
 npm run url
 ```
 
+Edit the index.ts file line 
+
+```
+const fileName = "scraped_data_<NAME>.json";
+```
+
 Then once the URLs are loaded into `scraped_urls.txt`, run:
 
 ```
