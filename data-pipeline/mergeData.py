@@ -32,9 +32,9 @@ class Store:
 
 # Define the file paths
 file_paths = [
-    "scrapers/uber-eats-scraper/scraped_data_mimi.json",
-    "scrapers/uber-eats-scraper/scraped_data_josh.json",
-    "scrapers/uber-eats-scraper/scraped_data_akhil.json",
+    # "../scrapers/uber-eats-scraper/scraped_data_mimi.json",
+    "../scrapers/uber-eats-scraper/scraped_data_josh.json",
+    # "../scrapers/uber-eats-scraper/scraped_data_akhil.json",
 ]
 
 store_count = 0

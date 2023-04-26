@@ -7,8 +7,7 @@ const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
 const promises_2 = require("fs/promises");
 async function scrapeRestaurant(url) {
-    console.log(url);
-    const browser = await playwright_1.chromium.launch({ headless: false });
+    const browser = await playwright_1.chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto(url);
@@ -79,6 +78,11 @@ async function scrapeRestaurant(url) {
         "Pickup near me",
         "About Uber Eats",
         "English",
+        "United States",
+        "California",
+        "Los Angeles",
+        "Westlake",
+        "Downtown",
         ""
     ];
     scrapedData.menu_items = scrapedData.menu_items.map((item) => item.replace(/Quick view/g, ''));

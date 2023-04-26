@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 
 async function scrapeRestaurant(url: string) {
   // Setup
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
   const page = await context.newPage();
 
@@ -94,6 +94,11 @@ async function scrapeRestaurant(url: string) {
     "Pickup near me",
     "About Uber Eats",
     "English",
+    "United States",
+    "California",
+    "Los Angeles",
+    "Westlake",
+    "Downtown",
     ""
   ];
 

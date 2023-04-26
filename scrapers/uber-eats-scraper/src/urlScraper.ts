@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 
 async function scrapeUrls(url: string) {
     // Setup
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -61,7 +61,7 @@ async function scrapeUrls(url: string) {
 }
 
 async function main() {
-    await scrapeUrls('https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjI4MSUyMEdyYW5kJTIwU3QlMjIlMkMlMjJyZWZlcmVuY2UlMjIlM0ElMjI4NGUzY2IzMC02OTQ0LTI1NWYtNTI4Ny04OWQzNzE2NTVhYTQlMjIlMkMlMjJyZWZlcmVuY2VUeXBlJTIyJTNBJTIydWJlcl9wbGFjZXMlMjIlMkMlMjJsYXRpdHVkZSUyMiUzQTQwLjcxNzYzMTYlMkMlMjJsb25naXR1ZGUlMjIlM0EtNzMuOTkyNjkzMiU3RA%3D%3D&ps=1');
+    await scrapeUrls('https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMlRoZSUyMERvbWFpbiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMjk2ZTRlZjM4LTQxNGMtYWQzYS1hMzYzLTljMWVlY2NkZjA1ZSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJ1YmVyX3BsYWNlcyUyMiUyQyUyMmxhdGl0dWRlJTIyJTNBMzAuNDAwODA5OSUyQyUyMmxvbmdpdHVkZSUyMiUzQS05Ny43MjYwOTk2JTdE&ps=1');
     // Example URL you can paste above:
     // https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk5ZVSUyMFN0ZXJuJTIwU2Nob29sJTIwb2YlMjBCdXNpbmVzcyUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUo1Uk40UVpCWndva1JWa1RyY0FMUUtqcyUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0E0MC43MjkxMDAyJTJDJTIybG9uZ2l0dWRlJTIyJTNBLTczLjk5NjI1MTMlN0Q%3D&ps=1
 }

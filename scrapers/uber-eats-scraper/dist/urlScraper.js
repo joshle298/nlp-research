@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
 async function scrapeUrls(url) {
-    const browser = await playwright_1.chromium.launch({ headless: false });
+    const browser = await playwright_1.chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto(url);
@@ -50,6 +50,6 @@ async function scrapeUrls(url) {
     await browser.close();
 }
 async function main() {
-    await scrapeUrls('https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjI4MSUyMEdyYW5kJTIwU3QlMjIlMkMlMjJyZWZlcmVuY2UlMjIlM0ElMjI4NGUzY2IzMC02OTQ0LTI1NWYtNTI4Ny04OWQzNzE2NTVhYTQlMjIlMkMlMjJyZWZlcmVuY2VUeXBlJTIyJTNBJTIydWJlcl9wbGFjZXMlMjIlMkMlMjJsYXRpdHVkZSUyMiUzQTQwLjcxNzYzMTYlMkMlMjJsb25naXR1ZGUlMjIlM0EtNzMuOTkyNjkzMiU3RA%3D%3D&ps=1');
+    await scrapeUrls('https://www.ubereats.com/feed?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMlRoZSUyMERvbWFpbiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMjk2ZTRlZjM4LTQxNGMtYWQzYS1hMzYzLTljMWVlY2NkZjA1ZSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJ1YmVyX3BsYWNlcyUyMiUyQyUyMmxhdGl0dWRlJTIyJTNBMzAuNDAwODA5OSUyQyUyMmxvbmdpdHVkZSUyMiUzQS05Ny43MjYwOTk2JTdE&ps=1');
 }
 main();
