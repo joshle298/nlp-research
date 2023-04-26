@@ -100,7 +100,7 @@ async function scrapeRestaurant(url: string) {
   scrapedData.menu_items = scrapedData.menu_items.map((item: string) => item.replace(/Quick view/g, ''));
   scrapedData.menu_items = scrapedData.menu_items.filter((item: string) => !forbidden.includes(item));
 
-  const fileName = "scraped_data.json";
+  const fileName = "scraped_data_josh.json";
 
   try {
     const fileContent = await fs.readFile(fileName, "utf-8");
