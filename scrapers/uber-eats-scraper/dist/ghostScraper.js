@@ -12,9 +12,9 @@ async function scrapeRestaurant(url) {
     const page = await context.newPage();
     await page.goto(url);
     console.log("Page loaded");
-    const store_name = await page.getByTestId('ck-store-text').innerText({ timeout: 30000 });
+    const store_name = await page.getByTestId('ck-store-text').innerText({ timeout: 75000 });
     console.log(store_name);
-    var store_address = await page.getByTestId('pickup-location').innerText({ timeout: 30000 });
+    var store_address = await page.getByTestId('pickup-location').innerText({ timeout: 75000 });
     store_address = store_address.replace('Pickup at:\n', '');
     const menu_items = await page.getByTestId('csds-text').allTextContents();
     var scrapedData = {
@@ -50,7 +50,7 @@ async function scrapeRestaurant(url) {
         "Terms of Service",
         "Privacy Policy"
     ];
-    scrapedData.menu_items = scrapedData.menu_items.map((item) => item.replace(/\d\d-\d\d min/g, ''));
+    scrapedData.menu_items = scrapedData.menu_items.map((item) => item.replace(/\d\d?-\d\d? min/g, ''));
     scrapedData.menu_items = scrapedData.menu_items.filter((item) => !forbidden.includes(item));
     scrapedData.menu_items = scrapedData.menu_items.filter((item) => item.replace(store_address, ''));
     const fileName = "scraped_ghost_data.json";

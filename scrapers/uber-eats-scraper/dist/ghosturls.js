@@ -11,7 +11,7 @@ async function scrapeUrls(url) {
     const page = await context.newPage();
     await page.goto(url);
     console.log("Page loaded");
-    const store_link = await page.getByRole("link", { name: "Seoul City Wings" }).getAttribute('href');
+    const store_link = await page.getByRole("link", { name: "Kore Tacos" }).getAttribute('href');
     console.log(store_link);
     const storeCards = await page.$$('a.restaurant-card');
     const links = [];
