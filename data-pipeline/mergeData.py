@@ -33,6 +33,7 @@ class Store:
 file_paths = [
     # "../scrapers/uber-eats-scraper/scraped_data_mimi.json",
     "../scrapers/uber-eats-scraper/scraped_data_josh.json",
+    "../scrapers/uber-eats-scraper/scraped_ghost_data.json",
     # "../scrapers/uber-eats-scraper/scraped_data_akhil.json",
 ]
 
