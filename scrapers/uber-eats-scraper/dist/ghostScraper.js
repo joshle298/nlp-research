@@ -7,14 +7,14 @@ const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
 const promises_2 = require("fs/promises");
 async function scrapeRestaurant(url) {
-    const browser = await playwright_1.chromium.launch({ headless: false });
+    const browser = await playwright_1.chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto(url);
     console.log("Page loaded");
-    const store_name = await page.getByTestId('ck-store-text').innerText();
+    const store_name = await page.getByTestId('ck-store-text').innerText({ timeout: 30000 });
     console.log(store_name);
-    var store_address = await page.getByTestId('pickup-location').innerText();
+    var store_address = await page.getByTestId('pickup-location').innerText({ timeout: 30000 });
     store_address = store_address.replace('Pickup at:\n', '');
     const menu_items = await page.getByTestId('csds-text').allTextContents();
     var scrapedData = {

@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 
 async function scrapeRestaurant(url: string) {
   // Setup
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
   const page = await context.newPage();
 
@@ -29,17 +29,18 @@ async function scrapeRestaurant(url: string) {
 //   }
 
 // await page.pause();
-const store_name = await page.getByTestId('ck-store-text').innerText();
+const store_name = await page.getByTestId('ck-store-text').innerText({ timeout: 30_000 });
 console.log(store_name);
 
 //   await page.getByRole("link", { name: "More info" }).click();
 //   const store_address = await page
 //     .getByRole("button", { name: "Copy" })
 //     .innerText();
+
 //   await page.getByTestId("close-button").click();
 //   console.log(store_address);
 
-var store_address = await page.getByTestId('pickup-location').innerText();
+var store_address = await page.getByTestId('pickup-location').innerText({ timeout: 30_000 });
 store_address = store_address.replace('Pickup at:\n', '');
 // console.log(store_address);
 
