@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const playwright_1 = require("playwright");
 const promises_1 = __importDefault(require("fs/promises"));
 async function scrapeUrls(url) {
-    const browser = await playwright_1.chromium.launch({ headless: false });
+    const browser = await playwright_1.chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto(url);
     console.log("Page loaded");
-    const store_link = await page.getByRole("link", { name: "Wing it on!" }).getAttribute('href');
+    const store_link = await page.getByRole("link", { name: "Seoul City Wings" }).getAttribute('href');
     console.log(store_link);
     const storeCards = await page.$$('a.restaurant-card');
     const links = [];
@@ -40,6 +40,6 @@ async function scrapeUrls(url) {
     await browser.close();
 }
 async function main() {
-    await scrapeUrls('https://dollinsfood.com/');
+    await scrapeUrls('https://carnegiefoods.com/');
 }
 main();

@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 
 async function scrapeUrls(url: string) {
     // Setup
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -13,7 +13,7 @@ async function scrapeUrls(url: string) {
     // await page.pause();
 
     // 
-    const store_link = await page.getByRole("link", { name: "Wing it on!" }).getAttribute('href');
+    const store_link = await page.getByRole("link", { name: "Seoul City Wings" }).getAttribute('href');
     console.log(store_link);
 
     const storeCards = await page.$$('a.restaurant-card');
@@ -50,7 +50,7 @@ async function scrapeUrls(url: string) {
 }
 
 async function main() {
-    await scrapeUrls('https://dollinsfood.com/');
+    await scrapeUrls('https://carnegiefoods.com/');
     // https://melrosefoodco.com/
 
     // Example URL you can paste above:
