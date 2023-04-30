@@ -75,6 +75,8 @@ for fast_food in fast_food_restaurants:
     indices_to_drop = df[df["name"].str.contains(fast_food)].index[1:]
     df.drop(indices_to_drop, inplace=True)
 
+df.drop_duplicates(subset=["name"], inplace=True)
+
 # %%
 # Embed each reataurant
 from openai.embeddings_utils import cosine_similarity, get_embedding
