@@ -32,7 +32,7 @@ class Store:
 # Define the file paths
 file_paths = [
     # "../scrapers/uber-eats-scraper/scraped_data_mimi.json",
-    "../scrapers/uber-eats-scraper/scraped_data_josh.json",
+    # "../scrapers/uber-eats-scraper/scraped_data_josh.json",
     "../scrapers/uber-eats-scraper/scraped_ghost_data.json",
     # "../scrapers/uber-eats-scraper/scraped_data_akhil.json",
 ]
@@ -72,10 +72,10 @@ print(
 )
 
 
-# filename = "merged-data.json"
-# file_path = os.path.join(os.path.dirname(__file__), filename)  # build the file path
+filename = "scraped_ghost_data.json"
+file_path = os.path.join(os.path.dirname(__file__), filename)  # build the file path
 
-# with open(file_path, "w", encoding="utf-8") as f:
-#     json.dump(
-#         [store.__dict__ for store in restaurants], f, indent=4, ensure_ascii=False
-#     )
+with open(file_path, "w", encoding="utf-8") as f:
+    json.dump(
+        [store.__dict__ for store in restaurants], f, indent=4, ensure_ascii=False
+    )
