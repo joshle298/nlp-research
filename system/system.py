@@ -4,6 +4,16 @@ Pulls data from excel spreadsheet and embeds it
 # %%
 # Load data
 import pandas as pd
+import dotenv
+import os
+import openai
+from dotenv import load_dotenv
+from openai.embeddings_utils import cosine_similarity, get_embedding
+import tiktoken
+
+load_dotenv()
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 df = pd.read_csv(
     r"../data\ubereats_data.tsv",
@@ -77,10 +87,44 @@ for fast_food in fast_food_restaurants:
 
 df.drop_duplicates(subset=["name"], inplace=True)
 
+
+# Initialize the tokenizer
+tokenizer = openai.Tokenizer()
+
+
+# Define a function to truncate each menu item to 8000 tokens using the tokenizer
+def truncate_menu(menu_item):
+    tokens = tokenizer.encode(menu_item)["data"]
+    if len(tokens) > 8000:
+        truncated_tokens = tokens[:8000]
+        truncated_menu_item = tokenizer.decode(truncated_tokens)
+        return truncated_menu_item
+    else:
+        return menu_item
+
+
+# Apply the function to the "menu" column to truncate each menu item
+df["menu"] = df["menu"].apply(truncate_menu)
+
 # %%
 # Embed each reataurant
-from openai.embeddings_utils import cosine_similarity, get_embedding
 
 # embedding model parameters
 embedding_model = "text-embedding-ada-002"
 embedding_encoding = "cl100k_base"  # this the encoding for text-embedding-ada-002
+max_tokens = 8000
+
+# # tokenize
+# encoding = tiktoken.get_encoding(embedding_encoding)
+# df["menu"] = df.menu.apply(lambda x: len(encoding.encode(x)))
+
+# assume df is your DataFrame containing the "menu" column
+df["menu"] = df["menu"].fillna("").astype(str)
+encoding = tiktoken.get_encoding(embedding_encoding)
+df["menu"] = df["menu"].apply(lambda x: encoding.encode(x)[:8000])
+df["menu"] = df["menu"].apply(lambda x: encoding.decode(x).join(" "))
+
+
+df["embedding"] = df.menu.apply(lambda x: get_embedding(x, engine=embedding_model))
+
+# %%
