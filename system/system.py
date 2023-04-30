@@ -80,7 +80,12 @@ df.drop_duplicates(subset=["name"], inplace=True)
 # %%
 # Embed each reataurant
 from openai.embeddings_utils import cosine_similarity, get_embedding
+import tiktoken
 
 # embedding model parameters
 embedding_model = "text-embedding-ada-002"
 embedding_encoding = "cl100k_base"  # this the encoding for text-embedding-ada-002
+
+encoding = tiktoken.get_encoding(embedding_encoding)
+
+df["embedding"] = df.menu.apply(lambda x: get_embedding(x, engine=embedding_model))
