@@ -13,7 +13,7 @@ async function scrapeUrls(url: string) {
     // await page.pause();
 
     // 
-    const store_link = await page.getByRole("link", { name: "Seoul City Wings" }).getAttribute('href');
+    const store_link = await page.getByRole("link", { name: "Kore Tacos" }).getAttribute('href');
     console.log(store_link);
 
     const storeCards = await page.$$('a.restaurant-card');
