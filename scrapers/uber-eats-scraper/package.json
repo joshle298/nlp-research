@@ -7,7 +7,9 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js --ignore ./scraped_data_josh.json\"",
-    "url": "concurrently \"npx tsc --watch\" \"nodemon -q dist/urlScraper.js --ignore ./scraped_data_josh.json\""
+    "url": "concurrently \"npx tsc --watch\" \"nodemon -q dist/urlScraper.js --ignore ./scraped_data_josh.json\"",
+    "ghostScrape": "concurrently \"npx tsc --watch\" \"nodemon -q dist/ghostScraper.js --ignore ./scraped_ghost_data.json\"",
+    "ghosturl": "concurrently \"npx tsc --watch\" \"nodemon -q dist/ghosturls.js --ignore ./scraped_ghost_data.json\""
   },
   "keywords": [],
   "author": "",
