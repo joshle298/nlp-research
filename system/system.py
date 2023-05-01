@@ -24,6 +24,9 @@ df = pd.read_csv(
     names=["kitchenType", "name", "address", "delete", "menu"],
 )
 df = df.drop(columns="delete", axis=1)
+df = df.dropna(subset=["kitchenType"])
+df = df.dropna(subset=["menu"])
+df = df[df["menu"] != "\r"]
 
 # %% get rid of duplicate fast food restaurants
 fast_food_restaurants = {
@@ -89,25 +92,25 @@ df.drop_duplicates(subset=["name"], inplace=True)
 
 
 # Initialize the tokenizer
-tokenizer = openai.Tokenizer()
+# tokenizer = openai.Tokenizer()
 
 
-# Define a function to truncate each menu item to 8000 tokens using the tokenizer
-def truncate_menu(menu_item):
-    tokens = tokenizer.encode(menu_item)["data"]
-    if len(tokens) > 8000:
-        truncated_tokens = tokens[:8000]
-        truncated_menu_item = tokenizer.decode(truncated_tokens)
-        return truncated_menu_item
-    else:
-        return menu_item
+# # Define a function to truncate each menu item to 8000 tokens using the tokenizer
+# def truncate_menu(menu_item):
+#     tokens = tokenizer.encode(menu_item)["data"]
+#     if len(tokens) > 8000:
+#         truncated_tokens = tokens[:8000]
+#         truncated_menu_item = tokenizer.decode(truncated_tokens)
+#         return truncated_menu_item
+#     else:
+#         return menu_item
 
 
-# Apply the function to the "menu" column to truncate each menu item
-df["menu"] = df["menu"].apply(truncate_menu)
+# # Apply the function to the "menu" column to truncate each menu item
+# df["menu"] = df["menu"].apply(truncate_menu)
 
 # %%
-# Embed each reataurant
+# Embed each restaurant
 
 # embedding model parameters
 embedding_model = "text-embedding-ada-002"
@@ -119,13 +122,15 @@ max_tokens = 8000
 # df["menu"] = df.menu.apply(lambda x: len(encoding.encode(x)))
 
 # assume df is your DataFrame containing the "menu" column
-df["menu"] = df["menu"].fillna("").astype(str)
+df["menu_encoded"] = df["menu"].fillna("").astype(str)
 encoding = tiktoken.get_encoding(embedding_encoding)
-df["menu"] = df["menu"].apply(lambda x: encoding.encode(x)[:8000])
-df["menu"] = df["menu"].apply(lambda x: encoding.decode(x).join(" "))
+df["menu_encoded"] = df["menu_encoded"].apply(lambda x: encoding.encode(x)[:8000])
+df["menu_encoded"] = df["menu_encoded"].apply(lambda x: "".join(encoding.decode(x)))
 
 
-df["embedding"] = df.menu.apply(lambda x: get_embedding(x, engine=embedding_model))
+df["embedding"] = df.menu_encoded.apply(
+    lambda x: get_embedding(x, engine=embedding_model)
+)
 
 # %%
 # get cosine similarities
