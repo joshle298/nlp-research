@@ -9,6 +9,8 @@ import openai
 from dotenv import load_dotenv
 from openai.embeddings_utils import cosine_similarity, get_embedding
 import tiktoken
+from stopwords import stopWords
+from fastfoods import fast_food_restaurants
 
 load_dotenv()
 
@@ -28,59 +30,6 @@ df = df.dropna(subset=["menu"])
 df = df[df["menu"] != "\r"]
 
 # %% get rid of duplicate fast food restaurants
-fast_food_restaurants = {
-    "McDonald's",
-    "Subway",
-    "Pizza Hut",
-    "Burger King",
-    "KFC",
-    "Domino's Pizza",
-    "Taco Bell",
-    "7-Eleven",
-    "Wendy's",
-    "Dunkin' Donuts",
-    "Starbucks",
-    "Chipotle Mexican Grill",
-    "Arby's",
-    "Chick-fil-A",
-    "Papa John's",
-    "Sonic Drive-In",
-    "Panda Express",
-    "Hardee's",
-    "Five Guys",
-    "Jack in the Box",
-    "Little Caesars",
-    "Jimmy John's",
-    "Carl's Jr.",
-    "Dairy Queen",
-    "Panera Bread",
-    "In-N-Out Burger",
-    "Whataburger",
-    "Popeyes Louisiana Kitchen",
-    "Bojangles'",
-    "Culver's",
-    "White Castle",
-    "Raising Cane's Chicken Fingers",
-    "Zaxby's",
-    "Del Taco",
-    "Long John Silver's",
-    "El Pollo Loco",
-    "Steak 'n Shake",
-    "Checkers",
-    "Church's Chicken",
-    "Jersey Mike's Subs",
-    "Boston Market",
-    "Quiznos",
-    "A&W Restaurants",
-    "Qdoba",
-    "Tim Hortons",
-    "Baskin-Robbins",
-    "Denny's",
-    "Captain D's",
-    "Firehouse Subs",
-    "Blimpie",
-}
-
 # Loop through each fast food restaurant and delete substring duplicates for each individual fast food
 for fast_food in fast_food_restaurants:
     indices_to_keep = df[df["name"].str.contains(fast_food)].index[:1]
@@ -89,6 +38,10 @@ for fast_food in fast_food_restaurants:
 
 df.drop_duplicates(subset=["name"], inplace=True)
 
+# Get rid of stop words
+df["menu"] = df["menu"].apply(
+    lambda x: " ".join([word for word in x.split() if word.lower() not in stopWords])
+)
 # %%
 # Embed each restaurant
 
@@ -144,3 +97,5 @@ print(
 print(
     f"Normal Kitchen to Ghost Kitchen Cosine Similarity Average: {combinedAvgSimilarity}"
 )
+
+# %%
