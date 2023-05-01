@@ -128,3 +128,38 @@ df["menu"] = df["menu"].apply(lambda x: encoding.decode(x).join(" "))
 df["embedding"] = df.menu.apply(lambda x: get_embedding(x, engine=embedding_model))
 
 # %%
+# get cosine similarities
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
+ghostRows = df[df["kitchenType"] == "g"]
+realRows = df[df["kitchenType"] == "r"]
+
+ghostRowsSample = ghostRows.head(20)["embedding"]
+realRowsSample = realRows.head(20)["embedding"]
+n = len(ghostRowsSample)
+
+ghost2ghostSimilarityMatrix = cosine_similarity(ghostRowsSample.tolist())
+ghost2ghostAvgSimilarity = (
+    np.sum(ghost2ghostSimilarityMatrix[np.triu_indices(n, k=1)]) * 2
+) / (n * (n - 1))
+
+combinedSamples = ghostRowsSample.append(realRowsSample)
+combinedSimilarityMatrix = cosine_similarity(combinedSamples.tolist())
+
+numRows, numCols = combinedSimilarityMatrix.shape
+
+combinedSimilarities = []
+# if numRows=NumCols=40, then i:[0-19], j[20,39]
+for i in range(int(numRows / 2)):
+    for j in range(int(numCols / 2), numCols):
+        combinedSimilarities.append(combinedSimilarityMatrix[i, j])
+
+combinedAvgSimilarity = np.array(combinedSimilarities).mean()
+
+print(
+    f"Ghost Kitchen to Ghost Kitchen Cosine Similarity Average: {ghost2ghostAvgSimilarity}"
+)
+print(
+    f"Normal Kitchen to Ghost Kitchen Cosine Similarity Average: {combinedAvgSimilarity}"
+)
