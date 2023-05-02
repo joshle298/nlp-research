@@ -126,8 +126,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Train a logistic regression model
 lr = LogisticRegression()
 lr.fit(X_train, y_train)
-
-# Make predictions on test set
 y_pred = lr.predict(X_test)
 
 # Evaluate model performance
@@ -143,3 +141,26 @@ print("Recall for ghost kitchen (g):", recall_g)
 print("Precision for regular kitchen (r):", precision_r)
 print("Recall for regular kitchen (r):", recall_r)
 print(f"Test data set value counts:\n{y_test.value_counts()}")
+
+# %% Try using random forest classifier
+from sklearn.ensemble import RandomForestClassifier
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train, y_train)
+y_pred = rfc.predict(X_test)
+
+# Evaluate model performance
+accuracy = accuracy_score(y_test, y_pred)
+precision_r = precision_score(y_test, y_pred, pos_label="r")
+recall_r = recall_score(y_test, y_pred, pos_label="r")
+precision_g = precision_score(y_test, y_pred, pos_label="g")
+recall_g = recall_score(y_test, y_pred, pos_label="g")
+
+print("Accuracy:", accuracy)
+print("Precision for ghost kitchen (g):", precision_g)
+print("Recall for ghost kitchen (g):", recall_g)
+print("Precision for regular kitchen (r):", precision_r)
+print("Recall for regular kitchen (r):", recall_r)
+print(f"Test data set value counts:\n{y_test.value_counts()}")
+
+# %%
