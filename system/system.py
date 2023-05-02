@@ -17,17 +17,17 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 df = pd.read_csv(
-    r"../data\ubereats_data.tsv",
+    r"../data\ubereats_data1.tsv",
     encoding="utf-8",
     sep="\t",
     lineterminator="\n",
     index_col=False,
-    names=["kitchenType", "name", "address", "delete", "menu"],
+    names=["kitchenType", "name", "address", "menu"],
 )
-df = df.drop(columns="delete", axis=1)
 df = df.dropna(subset=["kitchenType"])
 df = df.dropna(subset=["menu"])
 df = df[df["menu"] != "\r"]
+
 
 # %% get rid of duplicate fast food restaurants
 # Loop through each fast food restaurant and delete substring duplicates for each individual fast food
@@ -57,9 +57,9 @@ df["menu_encoded"] = df["menu_encoded"].apply(lambda x: encoding.encode(x)[:8000
 df["menu_encoded"] = df["menu_encoded"].apply(lambda x: "".join(encoding.decode(x)))
 
 
-df["embedding"] = df.menu_encoded.apply(
-    lambda x: get_embedding(x, engine=embedding_model)
-)
+# df["embedding"] = df.menu_encoded.apply(
+#     lambda x: get_embedding(x, engine=embedding_model)
+# )
 
 # %%
 # get cosine similarities
@@ -69,8 +69,8 @@ import numpy as np
 ghostRows = df[df["kitchenType"] == "g"]
 realRows = df[df["kitchenType"] == "r"]
 
-ghostRowsSample = ghostRows.head(20)["embedding"]
-realRowsSample = realRows.head(20)["embedding"]
+ghostRowsSample = ghostRows.head(30)["embedding"]
+realRowsSample = realRows.head(30)["embedding"]
 n = len(ghostRowsSample)
 
 ghost2ghostSimilarityMatrix = cosine_similarity(ghostRowsSample.tolist())
@@ -99,3 +99,47 @@ print(
 )
 
 # %%
+# Try to run through logistic regression
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+data = df.copy()
+
+embeddings = data["embedding"].apply(lambda x: pd.Series(x))
+embeddings.columns = ["embedding_" + str(i) for i in range(len(embeddings.columns))]
+data = pd.concat([data, embeddings], axis=1)
+data.drop(
+    ["embedding", "name", "address", "menu", "menu_encoded"],
+    axis=1,
+    inplace=True,
+)
+
+# Split data into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    data.drop("kitchenType", axis=1),
+    data["kitchenType"],
+    test_size=0.2,
+    random_state=42,
+)
+
+# Train a logistic regression model
+lr = LogisticRegression()
+lr.fit(X_train, y_train)
+
+# Make predictions on test set
+y_pred = lr.predict(X_test)
+
+# Evaluate model performance
+accuracy = accuracy_score(y_test, y_pred)
+precision_r = precision_score(y_test, y_pred, pos_label="r")
+recall_r = recall_score(y_test, y_pred, pos_label="r")
+precision_g = precision_score(y_test, y_pred, pos_label="g")
+recall_g = recall_score(y_test, y_pred, pos_label="g")
+
+print("Accuracy:", accuracy)
+print("Precision for ghost kitchen (g):", precision_g)
+print("Recall for ghost kitchen (g):", recall_g)
+print("Precision for regular kitchen (r):", precision_r)
+print("Recall for regular kitchen (r):", recall_r)
+print(f"Test data set value counts:\n{y_test.value_counts()}")
