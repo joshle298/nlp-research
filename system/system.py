@@ -17,7 +17,8 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 df = pd.read_csv(
-    r"../data\ubereats_data1.tsv",
+    # r"../data\ubereats_data1.tsv",
+    r"../data\test.tsv",
     encoding="utf-8",
     sep="\t",
     lineterminator="\n",
@@ -69,14 +70,24 @@ import numpy as np
 ghostRows = df[df["kitchenType"] == "g"]
 realRows = df[df["kitchenType"] == "r"]
 
-ghostRowsSample = ghostRows.head(30)["embedding"]
-realRowsSample = realRows.head(30)["embedding"]
+ghostRowsSample = ghostRows.head(8)["embedding"]
+realRowsSample = realRows.head(8)["embedding"]
 n = len(ghostRowsSample)
 
 ghost2ghostSimilarityMatrix = cosine_similarity(ghostRowsSample.tolist())
 ghost2ghostAvgSimilarity = (
     np.sum(ghost2ghostSimilarityMatrix[np.triu_indices(n, k=1)]) * 2
 ) / (n * (n - 1))
+
+
+from scipy.spatial.distance import pdist, squareform
+
+# compute pairwise distances between rows using cosine similarity
+dist_matrix = pdist(ghostRowsSample, metric="cosine")
+dist_matrix_square = squareform(dist_matrix)
+dist_upper_triangle = np.triu(dist_matrix_square, k=1)
+cosine_similarities = dist_upper_triangle[np.nonzero(dist_upper_triangle)]
+ghost2ghostMedianSimilarity = np.median(cosine_similarities)
 
 combinedSamples = ghostRowsSample.append(realRowsSample)
 combinedSimilarityMatrix = cosine_similarity(combinedSamples.tolist())
@@ -90,12 +101,20 @@ for i in range(int(numRows / 2)):
         combinedSimilarities.append(combinedSimilarityMatrix[i, j])
 
 combinedAvgSimilarity = np.array(combinedSimilarities).mean()
+combinedMedianSimilarity = np.array(combinedSimilarities).median()
 
 print(
     f"Ghost Kitchen to Ghost Kitchen Cosine Similarity Average: {ghost2ghostAvgSimilarity}"
 )
 print(
     f"Normal Kitchen to Ghost Kitchen Cosine Similarity Average: {combinedAvgSimilarity}"
+)
+
+print(
+    f"Ghost Kitchen to Ghost Kitchen Cosine Similarity Median: {ghost2ghostMedianSimilarity}"
+)
+print(
+    f"Normal Kitchen to Ghost Kitchen Cosine Similarity Median: {combinedMedianSimilarity}"
 )
 
 # %%
