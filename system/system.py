@@ -168,6 +168,7 @@ print("Recall for ghost kitchen (g):", recall_g)
 print("Precision for regular kitchen (r):", precision_r)
 print("Recall for regular kitchen (r):", recall_r)
 print(f"Test data set value counts:\n{y_test.value_counts()}")
+print(f"Total data set value counts:\n{data['kitchenType'].value_counts()}")
 
 # %% Try using random forest classifier
 from sklearn.ensemble import RandomForestClassifier
