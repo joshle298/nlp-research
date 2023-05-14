@@ -1,5 +1,9 @@
 # nlp-research
 
+## Final Paper
+[Final_NLP_Paper.pdf](https://github.com/joshle298/nlp-research/files/11473171/Group1_NLP_Final.pdf)
+
+## Scripts
 Run both scripts with `npm run dev` in the `uber-eats-scraper` directory.
 
 To run the script that gets URLs
@@ -11,6 +15,7 @@ Then run:
 ```
 npm run url
 ```
+
 
 Edit the index.ts file line:
 
